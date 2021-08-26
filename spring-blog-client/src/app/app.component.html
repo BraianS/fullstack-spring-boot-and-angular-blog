@@ -1,0 +1,9 @@
+<section class="hero is-fullheight-with-navbar">
+    <header *ngIf="showHeader == true"></header>
+    <section class="hero-body is-align-items-flex-start">
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <app-footer></app-footer>
+</section>

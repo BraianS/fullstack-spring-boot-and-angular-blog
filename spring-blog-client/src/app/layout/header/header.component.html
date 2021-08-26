@@ -1,0 +1,51 @@
+<div class="hero-head">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a routerLink="" routerLinkActive="router-link-active" class="navbar-item">
+                            <img src="../../../assets/scss/spring-logo.png" alt="logo" width="112" height="28">
+                        </a>
+                
+                        <a (click)="toggle()" #navBurger role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+                
+                    <div id="navbarBasicExample" class="navbar-menu" #navMenu>
+                        <div class="navbar-start">
+                            <a class="navbar-item" routerLink="">Home</a>
+                            <a class="navbar-item" [routerLink]="['/tags']" >Tags</a>
+                            <a class="navbar-item" [routerLink]="['/categories']">Categories</a>
+                            <a class="navbar-item" [routerLink]="['/submit']" >Submit</a>         
+                        </div>
+                    </div>
+                
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button  is-rounded is-primary" *ngIf="!user.username" routerLink="/login/signup">
+                                    <strong>Sign Up</strong>
+                                </a>
+                                <a class="button is-rounded is-primary" *ngIf="!user.username" routerLink="/login/signin">
+                                  <strong>Login</strong>
+                                </a>
+                                <a class="button is-danger is-outlined" *ngIf="user.username" (click)="logout()">
+                                    <span>Logout</span>
+                                    <span class="icon is-small">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </a>
+                                <a class="button is-rounded is-primary" *ngIf="user.username"
+                                    [routerLink]="['/user',user.username]"><strong>{{user.username}}</strong></a>                
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

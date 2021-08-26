@@ -1,0 +1,13 @@
+<div  class="help is-danger" *ngIf="control && control.errors && (control.dirty || control.touched)">
+    <div *ngIf="control.errors.required"><small>This field is required</small></div>
+    <div *ngIf="control.errors.minlength"><small>Minimum {{control.errors.minlength.requiredLength}} characters are required</small></div>
+    <div *ngIf="control.errors.maxlength"><small>Maximum {{control.errors.maxlength.requiredLength}} characters are required</small></div>
+    <div *ngIf="control.errors.unique"><small>{{control.errors.unique}}</small></div>
+    <div *ngIf="control.errors.lessThen"><small>{{control.errors.lessThen}}</small></div>
+    <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>
+    <div *ngIf="control.errors.email"><small>Email invalid</small></div>
+    <div *ngIf="control.errors.mobile"><small>{{control.errors.mobile}}</small></div>
+    <div *ngIf="control.errors.confirmPassword"><small>{{control.errors.confirmPassword}}</small></div>
+    <div *ngIf="control.errors.pattern"><small>Letter,number, dashes, and underscores only. Please try again without symbols</small></div>
+    <div *ngIf="control.errors.notMatch"><small>The Password is not the same. Please fix it.</small></div>
+</div>

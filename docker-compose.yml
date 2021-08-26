@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  mysql:
+    image: mysql:8.0.26
+    environment: 
+      MYSQL_DATABASE: springblog
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: rootraiz
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/braians/desenvolvimento/Docker/Volumes/Mysql/lib/mysql
+    networks:
+      - app-network
+  app:
+    image: braians/spring-blog-backend
+    build:
+      context: ./spring-blog-backend
+      dockerfile: Dockerfile
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/springblog
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootraiz
+    ports:
+      - 8080:8080
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+  app-ui:
+    image: braians/spring-blog-client
+    build: ./spring-blog-client
+    ports:
+      - 4200:80
+    depends_on: 
+      - app
+    networks: 
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,111 @@
+<div class="has-text-centered">
+  <h1 class="title is-1 py-6">Sign Up</h1>
+</div>
+
+<div class="columns is-centered py-1">
+  <div class="column is-3">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label for="name" class="label">Name</label>
+        <div class="control has-icons-right">
+          <input type="text" class="input"
+            [ngClass]="{'is-danger' : signUpControls.name.errors && signUpControls.name.touched, 'is-success': !signUpControls.name.errors}" placeholder="Name"
+            formControlName="name">
+          <app-error [control]="signUpControls.name" class="help is-danger"></app-error>
+          <span class="icon is-small is-right">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="username" class="label">Username</label>
+
+        <div class="control has-icons-left has-icons-right">
+          <input type="text" class="input"
+            [ngClass]="{'is-danger' : (signUpControls.username.errors && signUpControls.username.touched) || usernameResponse.status == '400' ,'is-success': !signUpControls.username.errors} "
+            placeholder="Username" formControlName="username" (change)="checkUsernameAvailability(signUpControls.username.value)">
+          <app-error [control]="signUpControls.username" class="help is-danger"></app-error>
+          <span class="icon is-small is-left">
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+          <p class="help" [ngClass]="{'is-danger': usernameResponse.status == '400' }" *ngIf="usernameResponse.message">
+            {{usernameResponse.message}}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password" class="label">Password</label>
+
+        <div class="control has-icons-left has-icons-right">
+          <input type="password" class="input"
+            [ngClass]="{'is-danger' : signUpControls.password.errors && signUpControls.password.touched , 'is-success': !signUpControls.password.errors}"
+            placeholder="Password" formControlName="password">
+          <app-error [control]="signUpControls.password" class="help is-danger"></app-error>
+          <span class="icon is-small is-left">
+            <i class="fa fa-key" aria-hidden="true"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password" class="label">Confirm Password</label>
+
+        <div class="control has-icons-left has-icons-right">
+          <input type="password" class="input"
+            [ngClass]="{'is-danger' : signUpControls.confirmPassword.errors && signUpControls.confirmPassword.touched, 'is-success': !signUpControls.confirmPassword.errors }"
+            placeholder="Confirm Password" formControlName="confirmPassword">
+          <app-error [control]="signUpControls.confirmPassword" class="help is-danger"></app-error>
+          <span class="icon is-small is-left">
+            <i class="fa fa-key" aria-hidden="true"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input"
+            [ngClass]="{'is-danger' : (signUpControls.email.errors && signUpControls.email.touched) || emailResponse.status == '400',  'is-success': !signUpControls.email.errors }"
+            type="email" placeholder="Email input" value="hello@" formControlName="email"
+            (change)="checkEmailAvailability(signUpControls.email.value)">
+          <app-error [control]="signUpControls.email" class="help is-danger"></app-error>
+          <span class="icon is-small is-left">
+            <i class="fa fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fa fa-check"></i>
+          </span>
+          <p class="help" [ngClass]="{'is-danger': emailResponse.status == '400', 'is-success': emailResponse.message}"
+            *ngIf="emailResponse.message">{{emailResponse.message}}</p>
+        </div>
+      </div>
+
+      <div class="buttons is-centered">
+        <button type="submit" [disabled]="!signUpForm.valid" [ngClass]="{ 'is-loading' : isLoading}" class="button is-primary is-rounded">
+          <span>Submit</span>
+          <span class="icon is-small">
+            <i class="fa fa-check"></i>
+          </span>
+        </button>
+        <button class="button is-danger is-rounded" routerLink="">Cancel</button>
+      </div>
+    </form>
+
+    <div class="notification is-danger mt-3" *ngIf="errorResponse.detail">
+      <button class="delete"></button>
+      {{errorResponse.detail}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,153 @@
+<div class="columns">
+    <div class="column is-one-third is-mobile">
+        <div class="has-text-centered">
+            <h1 class="title is-2 py-6">Update name</h1>
+            <form [formGroup]="nameForm" (ngSubmit)="updateName()">
+
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': nameControl.name.valid, 'is-danger': nameControl.name.errors && nameControl.name.touched}"
+                            type="text" placeholder="Text input" formControlName="name">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="nameControl.name"></app-error>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button class="button is-link" [ngClass]="{'is-loading': isLoading}" [disabled]="!nameForm.valid"
+                        type="submit">Save</button>
+                    <button class="button" (click)="cancelNameForm()">Cancel</button>
+                </div>                
+            </form>
+            <br>
+
+            <h2 class="title">Delete your Account</h2>
+            <button class="button is-danger" type="button" (click)="deleteAccount()">Delete Account</button>
+
+        </div>
+    </div>
+
+    <div class="column is-one-third is-mobile">
+        <div class="has-text-centered">
+            <h2 class="title is-2 py-6"> Update Email</h2>
+            <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': emailControl.password.valid, 'is-danger':( emailControl.password.errors && emailControl.password.touched) || emailErrorResponse.message}"
+                            type="password" formControlName="password">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="emailControl.password"></app-error>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': emailControl.email.valid, 'is-danger': (emailControl.email.errors && emailControl.email.touched) || emailErrorResponse.message}"
+                            type="text" placeholder="email@gmail.com" formControlName="email">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="emailControl.email"></app-error>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button class="button is-link" [ngClass]="{'is-loading': isLoadingEmail}"
+                        [disabled]="!emailForm.valid" type="submit">Save</button>
+                    <button class="button" type="reset" (click)="cancelEmailForm()">Cancel</button>
+                </div>
+            </form>
+
+            <div class="notification is-danger mt-3" *ngIf="emailErrorResponse.message">
+                <button class="delete" (click)="clearEmailError()"></button>
+                {{emailErrorResponse.message}}
+            </div>
+
+            <div class="notification is-success mt-3" *ngIf="emailResponse.message && emailForm">                
+                {{emailResponse.message}}
+              </div>
+        </div>
+    </div>
+
+    <div class="column is-one-third is-mobile">
+        <div class="has-text-centered">
+            <h2 class="title is-2 py-6">Update Password</h2>
+            <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
+
+                <div class="field">
+                    <label class="label">Old Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': passwordControl.oldPassword.valid, 'is-danger': (passwordControl.oldPassword.errors && passwordControl.oldPassword.touched) || passwordErrorResponse.message}"
+                            type="password" formControlName="oldPassword">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="passwordControl.oldPassword"></app-error>
+                </div>
+
+                <div class="field">
+                    <label class="label">New Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': passwordControl.newPassword.valid, 'is-danger': (passwordControl.newPassword.errors && passwordControl.newPassword.touched)  || passwordErrorResponse.message}"
+                            type="password" formControlName="newPassword">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="passwordControl.newPassword"></app-error>
+                </div>
+
+                <div class="field">
+                    <label class="label">Confirm Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': passwordControl.confirmPassword.valid, 'is-danger': (passwordControl.confirmPassword.errors && passwordControl.confirmPassword.touched)  || passwordErrorResponse.message}"
+                            type="password" formControlName="confirmPassword">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="passwordControl.confirmPassword" class="help is-danger"></app-error>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button class="button is-link" [ngClass]="{'is-loading': isLoadingPassword}"
+                        [disabled]="!passwordForm.valid" type="submit">Save</button>
+                    <button class="button" (click)="cancelPasswordForm()">Cancel</button>
+                </div>
+            </form>
+
+            <div class="notification is-danger mt-3" *ngIf="passwordErrorResponse.message">
+                <button class="delete" (click)="clearPasswordError()"></button>
+                {{passwordErrorResponse.message}}
+            </div>
+
+            <div class="notification is-success mt-3" *ngIf="passwordResponse.message">                
+                {{passwordResponse.message}}
+              </div>
+        </div>
+    </div>
+</div>

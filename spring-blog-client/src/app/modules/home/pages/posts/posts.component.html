@@ -1,0 +1,19 @@
+<div *ngIf="pagination.totalElements > 0">
+    <post-pagination [pagination]="pagination" [totalPages]="totalPages" (changePage)="setPage($event)">
+    </post-pagination>
+</div>
+
+<div *ngIf="pagination.totalElements == 0">
+    <section class="hero is-medium ">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <p class="title">
+              <i class="fa fa-lg fa-blog"></i> Welcome to Spring Blog
+            </p>
+            <p class="subtitle">
+              To submit <strong>Post</strong> you need be login
+            </p>
+          </div>
+        </div>
+      </section>
+  </div>

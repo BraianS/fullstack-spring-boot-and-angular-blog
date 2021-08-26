@@ -1,0 +1,121 @@
+<div class="columns">
+    <div class="column">
+
+        <div class="has-text-centered">
+            <h2 class="title py-6">Save new Tag</h2>
+            <form [formGroup]="titleTagForm" (ngSubmit)="onSubmit()">
+
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': titleTagControl.title.valid, 'is-danger': titleTagControl.title.errors && titleTagControl.title.touched}"
+                            type="text" placeholder="Text input" formControlName="title">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="titleTagControl.title"></app-error>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button *ngIf="!isEdit" class="button" [disabled]="!titleTagForm.valid" type="submit">Save</button>
+                    <button *ngIf="isEdit" class="button" [disabled]="!titleTagForm.valid" type="submit">Update</button>
+                    <button class="button" type="reset" (click)="cancelTitleTag()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <br>
+
+        <h2 class=" has-text-centered title">Edit Tags</h2>
+        <div class="table-container">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tag of tags">
+                        <th>{{tag.id}}</th>
+                        <th>{{tag.title}}</th>
+                        <th>{{tag.slug}}</th>
+                        <th>
+                            <div class="buttons">
+                                <button class="button" (click)="editTag(tag)">Edit</button>
+                                <button class="button is-danger" (click)="deleteTag(tag.id)">Delete</button>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="column">
+        <div class="has-text-centered">
+            <h2 class="title py-6">Save new Category</h2>
+            <form [formGroup]="titleCategoryForm" (ngSubmit)="onSubmitCategory()">
+
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            [ngClass]="{'is-success': titleCategoryControl.title.valid, 'is-danger': titleCategoryControl.title.errors && titleCategoryControl.title.touched}"
+                            type="text" placeholder="Text input" formControlName="title">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </div>
+                    <app-error [control]="titleCategoryControl.title"></app-error>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button class="button" *ngIf="!isEditCategory" [disabled]="!titleCategoryForm.valid"
+                        type="submit">Save</button>
+                    <button *ngIf="isEditCategory" class="button" [disabled]="!titleCategoryForm.valid"
+                        type="submit">Update</button>
+                    <button class="button" type="reset" (click)="cancelTitleTag()">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+        <br>
+        <h2 class=" has-text-centered title">Edit Categories</h2>
+        <div class="table-container">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categories">
+                        <th>{{category.id}}</th>
+                        <th>{{category.title}}</th>
+                        <th>{{category.slug}}</th>
+                        <th>
+                            <div class="buttons">
+                                <button class="button" (click)="editCategory(category)">Edit</button>
+                                <button class="button is-danger" (click)="deleteCategory(category.id)">Delete</button>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

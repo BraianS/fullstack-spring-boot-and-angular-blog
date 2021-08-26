@@ -1,0 +1,23 @@
+<div *ngIf="tagOrCategory.length > 0">
+  <div class="buttons">
+    <button class="button is-link is-light" (click)="onRouter(name.slug,name.id)" routerLinkActive="router-link-active"
+      *ngFor="let name of tagOrCategory">
+      {{name.title}}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="tagOrCategory.length == 0">
+  <section class="hero is-medium ">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <p class="title">
+          <i class="fa fa-lg fa-blog"></i> Welcome to Spring Blog
+        </p>
+        <p class="subtitle">
+          To add <strong>{{route}}</strong> you need be a Admin
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,106 @@
+<div class="content">
+    <h1>{{postDetail.title}}</h1>
+    <h6>created by {{postDetail.user.username}} - {{postDetail.createdAt | date :'dd:MM:yyyy hh:mm'}}</h6>
+    <div [innerHtml]="postDetail.content"></div>
+
+    <div class="buttons">
+        <p>Categories:</p>
+        <button class="button is-light" *ngFor="let category of postDetail.categories">
+            <a [routerLink]="['/category',category.id]">{{category.title}}</a>
+        </button>
+    </div>
+
+    <div class="buttons">
+        <p>Tags:</p>
+        <button class="button is-light" *ngFor="let tag of postDetail.tags">
+            <a [routerLink]="['/tag',tag.id]" routerLinkActive="router-link-active">{{tag.title}}</a>
+        </button>
+    </div>
+</div>
+
+<form [formGroup]="commentForm" (ngSubmit)="saveComment()">
+    <div class="field">
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea" placeholder="Comment" formControlName="content"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button type="submit" class="button is-primary">Save</button>
+        <button type="reset" class="button is-danger" (click)="clearComment()">Cancel</button>
+    </div>
+</form>
+
+<ul>
+    <li *ngFor="let comment of comments">
+        criado por - {{ comment.createdAt | date :'dd-MM-yyyy'}}
+        <br>
+        {{comment.content}}
+        <div class="buttons">
+            <button class="button is-primary" (click)="isReplyEnable(comment.id)">reply</button>
+            <button class="button is-danger" *ngIf="isUserComment(comment.createdBy)"
+                (click)="deleteComment(comment.id)">Delete</button>
+        </div>
+        <form [formGroup]="subCommentForm" *ngIf="commentSelected == comment.id"
+            (ngSubmit)="saveSubComment(comment.id)">
+            <div class="field">
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Comment" formControlName="content"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="button is-primary">Save</button>
+            </div>
+        </form>
+
+        <!-- Nested SubComments-->
+        <div class="content">
+            <ng-template #commentTemplate let-subcomments>
+                <ul class="list">
+                    <li *ngFor="let subcomment of subcomments">
+                        <strong>{{subcomment.id}} {{subcomment.content}}</strong>
+                        <div class="buttons">
+                            <button class="button is-primary" (click)="isReplyEnable(subcomment.id)">reply</button>
+                            <button class="button is-danger" *ngIf="isUserComment(subcomment.createdBy)"
+                                (click)="deleteComment(subcomment.id)">Delete</button>
+                        </div>
+                        <form [formGroup]="subCommentForm" *ngIf="commentSelected == subcomment.id"
+                            (ngSubmit)="saveSubComment(subcomment.id)">
+                            <div class="field">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <textarea class="textarea" placeholder="Comment"
+                                                formControlName="content"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="buttons">
+                                <button type="submit" class="button is-primary">Save</button>
+                            </div>
+                        </form>
+
+                        <ul *ngIf="subcomment.comments.length > 0">
+                            <ng-container *ngTemplateOutlet="commentTemplate;context: {$implicit:subcomment.comments}">
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ul>
+            </ng-template>
+        </div>
+
+        <ng-container *ngTemplateOutlet="commentTemplate;context: {$implicit:comment.comments}"></ng-container>
+        <!-- end Nested SubComments-->
+    </li>
+</ul>

@@ -1,0 +1,79 @@
+<div class="columns is-centered">
+    <div class="column is-7">
+        <form (ngSubmit)="onSubmit()" [formGroup]="postForm">
+
+            <div class="field">
+                <label for="title" class="label">Title</label>
+                <div class="control has-icons-left has-icons right">
+                    <input class="input"
+                        [ngClass]="{'is-success': !postControl.title.errors, 'is-danger': postControl.title.errors && postControl.title.touched}"
+                        type="text" placeholder="Title" formControlName="title">
+
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                    </span>
+
+                    <app-error [control]="postControl.title"></app-error>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="content" class="label">Content</label>
+
+                <angular-editor class="te-basic-tools" #myEditor formControlName="content" [config]="editorConfig">
+                </angular-editor>
+                <div class="html">{{postControl.content.value}}</div>
+
+                <app-error [control]="postControl.content"></app-error>
+            </div>
+
+            <div class="field">
+
+                <label for="" class="label">Status</label>
+                <div class="control">
+
+                    <div class="select">
+                        <select name="status" id="status" (change)="onChange($event)" formControlName="status">
+                            <option *ngFor="let name of status">{{name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="Tags" class="label">Tags</label>
+                <ng-select formControlName="tags" [searchable]="true" placeholder="Search a tag" (add)="clearInput()"
+                    [multiple]="true" [maxSelectedItems]="5" (input)="onSearchTagTitle($event)">
+                    <ng-option *ngFor="let tag of tags" [value]="tag.title">{{tag.slug}}</ng-option>
+                </ng-select>
+
+                <app-error [control]="postControl.tags"></app-error>
+            </div>
+
+            <div class="field invalid">
+                <label for="Categories" class="label">Categories</label>
+                <ng-select formControlName="categories" [searchable]="true" placeholder="Search a category"
+                    (add)="clearCategories()" [multiple]="true" [maxSelectedItems]="5"
+                    (input)="onSearchCategoryTitle($event)">
+                    <ng-option *ngFor="let category of categories" [value]="category.title">{{category.slug}}
+                    </ng-option>
+                </ng-select>
+
+                <app-error [control]="postControl.categories"></app-error>
+            </div>
+
+            <div class="buttons has-text-centered">
+                <button class="button is-link" type="submit" [disabled]="!postForm.valid">Submit</button>
+                <button class="button is-link is-light" (click)=clearForm()>Cancel</button>
+            </div>
+        </form>
+
+        <div class="notification is-danger mt-3" *ngIf="errorBase.message">
+            {{appResponse.message}}
+        </div>
+
+        <div class="notification is-success mt-3" *ngIf="appResponse.message">
+            {{appResponse.message}}
+        </div>
+    </div>
+</div>

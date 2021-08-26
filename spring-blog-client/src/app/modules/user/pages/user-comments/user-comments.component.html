@@ -1,0 +1,46 @@
+<div class="card" *ngFor="let comment of pageable.content; let index = index">
+    <div class="card-content" *ngIf="commentSelected !== comment.id">
+        <div class="content">
+            {{comment.content}}
+            <br>
+            <time>{{comment.createdAt | date : 'dd/MM/yyyy hh:mm'}}</time>
+        </div>
+    </div>
+
+    <form type="submit" *ngIf="(user && user.username === comment.createdBy) && commentSelected === comment.id" (ngSubmit)="updateComment(comment.id)">
+        <div class="field">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <textarea class="textarea" name="content" [(ngModel)]="commentRequest.content"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <footer class="card-footer">
+        <a class="card-footer-item" *ngIf="commentSelected === comment.id && toggleEditComment === true"
+            (click)="update(comment)">Save</a>
+        <a class="card-footer-item" *ngIf="commentSelected === comment.id && toggleEditComment === true"
+            (click)="cancelar()">Cancelar</a>
+
+        <a class="card-footer-item" *ngIf="(user && user.username === comment.createdBy) && (commentSelected !== comment.id && toggleEditComment !== true)" (click)="editComment(comment)">Edit</a>
+        <a class="card-footer-item" *ngIf="(user && user.username === comment.createdBy) && (commentSelected !== comment.id && toggleEditComment !== true)" (click)="deleteComment(comment.id)">Delete</a>
+    </footer>
+</div>
+
+<nav class="pagination" role="navigation" aria-label="pagination">
+    <button class="pagination-previous" title="This is the first page" (click)="setPage(page -1, $event)"
+        [disabled]="pageable.first">Previous</button>
+    <button class="pagination-next" (click)="setPage(page +1, $event)" [disabled]="pageable.last">Next
+        page</button>
+
+    <ul class="pagination-list">
+
+        <li>
+            <a class="pagination-link" aria-label="Goto page" *ngFor="let p of totalPages; let index = index"
+                (click)=setPage(index,$event) [ngClass]="page == index ? 'is-current' : '' ">{{index}}</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="has-text-centered">
+    <h1 class="title is-1 py-6">Sign In</h1>
+  </div>
+
+  <div class="columns is-centered py-1">
+    <div class="column  is-3">
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+        <div class="field">
+          <label class="label">Username Or Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input type="text" class="input"
+              [ngClass]="{'is-danger' : (signInControls.usernameOrEmail.errors && signInControls.usernameOrEmail.touched) || errorResponse.detail,'is-success' : !signInControls.usernameOrEmail.errors }"
+              placeholder="Username Or Email" formControlName="usernameOrEmail" (change)="clearBaseError()">
+            <app-error [control]="signInControls.usernameOrEmail"></app-error>
+            <p class="help" *ngIf="errorResponse.detail && !signInControls.usernameOrEmail.errors"
+              [ngClass]="{'is-danger':errorResponse.detail && !signInControls.usernameOrEmail.errors}">
+              {{errorResponse.detail}}</p>
+            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password" class="label">Password</label>
+
+          <div class="control has-icons-left has-icons-right">
+            <input type="text" class="input"
+              [ngClass]="{ 'is-danger': (signInControls.password.errors && signInControls.password.touched) || errorResponse.detail, 'is-success' : !signInControls.password.errors  }"
+              placeholder="Password" formControlName="password">
+            <app-error [control]="signInControls.password"></app-error>
+            <span class="icon is-small is-left">
+              <i class="fa fa-key" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="buttons is-centered">
+          <button type="submit" class="button is-primary is-rounded" [ngClass]="{ 'is-loading' : isLoading}"
+            [disabled]="!signInForm.valid">
+            <span>Submit</span>
+            <span class="icon is-small">
+              <i class="fa fa-check"></i>
+            </span>
+          </button>
+          <button class="button is-danger is-rounded" (click)="clearForm()">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

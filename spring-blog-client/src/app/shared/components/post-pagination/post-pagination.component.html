@@ -1,0 +1,34 @@
+<div *ngIf="pagination.content.length > 0">
+    <div class="columns is-multiline is-mobile">
+        <div class="column is-one-quarter" *ngFor="let post of pagination.content">
+            <div class="card" [routerLink]="['/post',post.slug,post.id]">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">{{post.user.name}}</p>
+                            <p class="subtitle is-6" [routerLink]="['user',post.user.username]">@{{post.user.username}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div [innerHtml]="post.summary"></div>
+                        <br>
+                        <time>{{post.createdAt | date:'hh:mm - dd MMMM yyyy'}}</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav *ngIf="pagination.content.length > 0" class="pagination" role="navigation" aria-label="pagination">
+    <a class="pagination-previous" title="This is the first page" disabled>Previous</a>
+    <a class="pagination-next">Next page</a>
+    <ul class="pagination-list">
+
+        <li>
+            <a class="pagination-link" aria-label="Goto page" [ngClass]="{'is-current': pageNumber === index}"
+                *ngFor="let p of totalPages; let index = index" (click)=setPageChild(index)>{{index}}</a>
+        </li>
+    </ul>
+</nav>
