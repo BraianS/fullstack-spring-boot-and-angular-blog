@@ -1,17 +1,18 @@
 <div class="content">
     <h1>{{postDetail.title}}</h1>
-    <h6>created by {{postDetail.user.username}} - {{postDetail.createdAt | date :'dd:MM:yyyy hh:mm'}}</h6>
+    <p>{{postDetail.user.username}} / {{postDetail.createdAt | date :'EEEE, MMM d, y'}}</p>
     <div [innerHtml]="postDetail.content"></div>
 
+    <br>
     <div class="buttons">
-        <p>Categories:</p>
+        <span>Categories:</span>
         <button class="button is-light" *ngFor="let category of postDetail.categories">
             <a [routerLink]="['/category',category.id]">{{category.title}}</a>
         </button>
     </div>
 
     <div class="buttons">
-        <p>Tags:</p>
+        <span>Tags:</span>
         <button class="button is-light" *ngFor="let tag of postDetail.tags">
             <a [routerLink]="['/tag',tag.id]" routerLinkActive="router-link-active">{{tag.title}}</a>
         </button>
