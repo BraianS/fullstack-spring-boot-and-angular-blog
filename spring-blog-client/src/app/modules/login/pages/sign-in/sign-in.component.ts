@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseError } from 'src/app/core/interface/core.interface';
 import { PasswordValidation, UsernameValidation } from 'src/app/core/validators/Validator';
@@ -12,13 +12,13 @@ import { AuthenticateService } from '../../shared/authenticate.service';
 })
 export class SignInComponent implements OnInit {
 
-  signInForm: FormGroup;
+  signInForm: UntypedFormGroup;
   errorResponse: BaseError = new BaseError();
 
   isLoading:Boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authenticateService: AuthenticateService,
     private router: Router) {
 

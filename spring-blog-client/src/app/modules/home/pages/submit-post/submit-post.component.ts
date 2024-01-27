@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { AppResponse, BaseError, IdAndTitleAndSlugResponse } from 'src/app/core/interface/core.interface';
@@ -16,7 +16,7 @@ import { TagService } from '../../shared/tag.service';
 })
 export class SubmitPostComponent implements OnInit {
 
-  postForm: FormGroup;
+  postForm: UntypedFormGroup;
   status: Status[] = [Status.PUBLIC, Status.PRIVATE];
 
   tags: IdAndTitleAndSlugResponse[] = [];
@@ -29,7 +29,7 @@ export class SubmitPostComponent implements OnInit {
   errorBase:BaseError = new BaseError();
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private postService: PostsService,
     private tagService: TagService,
     private categoryService: CategoryService,

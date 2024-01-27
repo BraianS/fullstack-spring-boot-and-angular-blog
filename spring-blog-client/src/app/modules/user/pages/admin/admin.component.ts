@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IdAndTitleAndSlugResponse } from 'src/app/core/interface/core.interface';
 import { TitleValidation } from 'src/app/core/validators/Validator';
@@ -13,8 +13,8 @@ import { TagService } from 'src/app/modules/home/shared/tag.service';
 })
 export class AdminComponent implements OnInit {
 
-  titleTagForm: FormGroup;
-  titleCategoryForm: FormGroup;
+  titleTagForm: UntypedFormGroup;
+  titleCategoryForm: UntypedFormGroup;
 
   tagUpdate: IdAndTitleAndSlugResponse = {} as IdAndTitleAndSlugResponse;
   categoryUpdate: IdAndTitleAndSlugResponse = {} as IdAndTitleAndSlugResponse;
@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   isEditCategory:Boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private categoryService: CategoryService,
     private tagService: TagService,
     private toastrService: ToastrService

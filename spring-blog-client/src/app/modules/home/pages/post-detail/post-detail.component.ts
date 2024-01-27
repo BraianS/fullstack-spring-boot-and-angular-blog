@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TokenService } from 'src/app/modules/login/shared/token.service';
 import { CommentResponse, PostDetail } from '../../interface/home.interface';
@@ -13,8 +13,8 @@ import { PostsService } from '../../shared/posts.service';
 })
 export class PostDetailComponent implements OnInit {
 
-  commentForm: FormGroup;
-  subCommentForm: FormGroup;
+  commentForm: UntypedFormGroup;
+  subCommentForm: UntypedFormGroup;
 
   postDetail: PostDetail = {} as PostDetail;
   comments: CommentResponse[] = [];
@@ -28,7 +28,7 @@ export class PostDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private commentService: CommentService,
     private tokenService: TokenService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: UntypedFormBuilder) {
 
     this.commentForm = this.formBuilder.group({
       content: ['', Validators.required]

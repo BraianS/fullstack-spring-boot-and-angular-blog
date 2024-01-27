@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AppResponse, BaseError } from 'src/app/core/interface/core.interface';
@@ -15,9 +15,9 @@ import { UserService } from '../../shared/user.service';
 })
 export class EditUserProfileComponent implements OnInit {
 
-  nameForm: FormGroup;
-  passwordForm: FormGroup;
-  emailForm: FormGroup;
+  nameForm: UntypedFormGroup;
+  passwordForm: UntypedFormGroup;
+  emailForm: UntypedFormGroup;
   isLoading: Boolean = false;
   isLoadingEmail: Boolean = false;
   isLoadingPassword: Boolean = false;
@@ -35,7 +35,7 @@ export class EditUserProfileComponent implements OnInit {
     private userService: UserService,
     private tokenService: TokenService,
     private authenticateService: AuthenticateService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService,
     private router: Router

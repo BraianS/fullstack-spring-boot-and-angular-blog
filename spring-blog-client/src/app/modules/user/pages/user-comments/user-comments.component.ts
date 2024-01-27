@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CommentService } from 'src/app/modules/home/shared/comment.service';
 import { TokenService } from 'src/app/modules/login/shared/token.service';
@@ -18,7 +18,7 @@ export class UserCommentsComponent implements OnInit {
   size:number = 20;
   pageable:any;
   totalPages:Array<Number> = new Array<Number>();
-  commentForm:FormGroup;
+  commentForm:UntypedFormGroup;
   toggleEditComment:Boolean = false
   IsUserlogged:Boolean = true;
   user:any;
@@ -31,7 +31,7 @@ export class UserCommentsComponent implements OnInit {
     private userService:UserService,
     private commentService:CommentService,
     private activatedRouter:ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private tokenService:TokenService
   ) {
     this.commentForm = this.formBuilder.group({

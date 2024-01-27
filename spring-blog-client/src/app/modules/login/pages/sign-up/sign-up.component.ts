@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseError } from 'src/app/core/interface/core.interface';
 import { EmailValidation, NameValidation, passwordMatch, PasswordValidation, UsernameValidation } from 'src/app/core/validators/Validator';
@@ -13,7 +13,7 @@ import { AuthenticateService } from '../../shared/authenticate.service';
 })
 export class SignUpComponent implements OnInit {
 
-  signUpForm: FormGroup;
+  signUpForm: UntypedFormGroup;
   errorResponse: BaseError = new BaseError();
   emailResponse: BaseError = new BaseError();
   usernameResponse: BaseError = new BaseError();
@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
   isLoading:Boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authenticateService: AuthenticateService,
     private userService: UserService,
     private router: Router) {
@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
 
   }
 
-  checkPasswords(group: FormGroup) {
+  checkPasswords(group: UntypedFormGroup) {
     const password = group.controls.password.value;
     const confirmPassword = group.controls.confirmPassword.value;
 

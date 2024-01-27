@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormGroup, Validators } from "@angular/forms";
 
 export const NameValidation = [
     Validators.required,
@@ -44,7 +44,7 @@ export const ContentValidation = [
 ]
 
 export function ConfirmedValidation(controlName: string, matchingControlName:string){
-    return (formGroup:FormGroup) => {
+    return (formGroup:UntypedFormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
         if(matchingControl.errors && !matchingControl.errors.confirmedValidator) {
