@@ -11,15 +11,15 @@ To test this project you can either use Docker to install everything or install 
 * Docker
 * Mysql
 * Java 11
-* Angular CLI: 12.0.5.
+* Angular CLI: 17.1.1.
 
 ### Installing
 
 * Clone this project repository
 * Install Mysql
 * Install Java 11 (This project I used AdoptOpenJdk)
-* Install Angular CLI: 12.0.5
-  * Run npm install -g @angular/cli to install Globally or npm install @angular/cli to install locally. To install Install Specific Version (Example: 12.0.5) npm install -g @angular/cli@12.0.5.
+* Install Angular CLI: 17.1.1
+  * Run npm install -g @angular/cli to install Globally or npm install @angular/cli to install locally. To install Install Specific Version (Example: 17.1.1) npm install -g @angular/cli@17.1.1.
 
 Run Spring Blog Server
 
@@ -57,7 +57,9 @@ Instructions how to install **Docker** on [Ubuntu](https://docs.docker.com/insta
 How to run it?
 
 Run this command in a terminal:
-
+* In **spring-boot-backend** change the mysql password to what you use ```spring.datasource.username=root
+spring.datasource.password=CHANGE``` just to run spring boot with the code below and create the jar
+* ```cd spring-blog-backend && mvnw spring-boot:install``` to generate jar file in destination folder
 * ```docker-compose up --build``` - Build and start the containers.
 * ```docker-machine ip default``` - Get docker host ip address.
 * To access use ```http://localhost:4200/``` or ```http://<docker host ip address>:4200/```
@@ -66,7 +68,7 @@ Run this command in a terminal:
 
 ### spring-blog-frontend
 
-* [Angular CLI: 12.0.5](https://www.npmjs.com/package/@angular/cli/v/12.0.5)
+* [Angular CLI: 17.1.1](https://www.npmjs.com/package/@angular/cli/v/17.1.1)
 * [Bulma 0.9.3](https://www.npmjs.com/package/bulma)
 * [Ngx-toastr](https://www.npmjs.com/package/ngx-toastr/v/14.0.0)
 * [ng-select](https://www.npmjs.com/package/@ng-select/ng-select/v/7.2.0)
