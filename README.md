@@ -23,11 +23,11 @@ To test this project you can either use Docker to install everything or install 
 
 Run Spring Blog Server
 
-* ```cd spring-boot-server && mvnw spring-boot:run```
+* ```cd spring-blog-backend && mvnw spring-boot:run```
 
 Run Spring Blog Client with proxy to api Spring Blog Backend
 
-* ```cd spring-boot-client && npm start```
+* ```cd spring-blog-client && npm start```
 
 ```
 Open the url http://localhost:4200
